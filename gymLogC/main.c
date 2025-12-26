@@ -1,10 +1,19 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+
+#include "exercise.h"
 
 int main()
 {
     int input = 1;
+    int workout = 0;
     char input1[16];
+    int exerciseCount = 0;
+
+    struct Exercise exercises[100];
+
+    FILE *file;
 
     while(input != 0)
     {
@@ -13,7 +22,9 @@ int main()
         printf("1. Start new workout\n");
         printf("2. View previous workouts\n");
         printf("3. Add new exercise\n");
-        printf("4. View workout statistics\n");
+        printf("4. View all exercises\n");
+        printf("5. View workout statistics\n");
+        printf("0. Quit program\n");
 
         fgets(input1, sizeof(input1), stdin);
         input = atoi(input1);
@@ -27,13 +38,26 @@ int main()
             printf("2");
             break;
         case 3:
-            printf("3");
+            printf("Write the name of the exercise: ");
+            fgets(exercises[exerciseCount].exerciseName,sizeof(exercises[exerciseCount].exerciseName),stdin);
+            exerciseCount++;
             break;
         case 4:
-            printf("4");
+            for(int i = 0; i < exerciseCount; i++)
+            {
+                printf("%s", exercises[i].exerciseName);
+            }
+            break;
+        case 5:
+            printf("5");
             break;
         case 0:
-            printf("Quiting...");
+            printf("Quiting...\n");
+
+            break;
+        default:
+            printf("Write a number between 0-5\n");
+            break;
         }
 
     }
