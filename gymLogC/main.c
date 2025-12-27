@@ -14,6 +14,8 @@ int main()
     struct Exercise exercises[100];
 
     FILE *file;
+    void addExercise(struct Exercise exercises[], int *exerciseCount); //3
+    void viewExercise(struct Exercise exercises[], int exerciseCount); //4
 
     while(input != 0)
     {
@@ -38,22 +40,16 @@ int main()
             printf("2");
             break;
         case 3:
-            printf("Write the name of the exercise: ");
-            fgets(exercises[exerciseCount].exerciseName,sizeof(exercises[exerciseCount].exerciseName),stdin);
-            exerciseCount++;
+            addExercise(exercises, &exerciseCount);
             break;
         case 4:
-            for(int i = 0; i < exerciseCount; i++)
-            {
-                printf("%s", exercises[i].exerciseName);
-            }
+            viewExercise(exercises, exerciseCount);
             break;
         case 5:
             printf("5");
             break;
         case 0:
             printf("Quiting...\n");
-
             break;
         default:
             printf("Write a number between 0-5\n");
@@ -63,4 +59,25 @@ int main()
     }
 
     return 0;
+}
+
+
+void addExercise(struct Exercise exercises[], int *exerciseCount) //3
+{
+    if(*exerciseCount >= 100)
+    {
+        printf("Max number of exercises achieved");
+        return;
+    }
+    printf("Write the name of the exercise: ");
+    fgets(exercises[*exerciseCount].exerciseName,sizeof(exercises[*exerciseCount].exerciseName),stdin);
+    (*exerciseCount)++;
+}
+
+void viewExercise(struct Exercise exercises[], int exerciseCount) //4
+{
+    for(int i = 0; i < exerciseCount; i++)
+    {
+        printf("%s", exercises[i].exerciseName);
+    }
 }
